@@ -11,12 +11,11 @@
         android:id="@+id/fr_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent" />
+        <!--<ListView-->
+            <!--android:id="@+id/content"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/colorAccent" />-->
     </FrameLayout>
 
     <!--headerLayout用于显示头部的布局-->
@@ -27,7 +26,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/slidemenu" />
+        app:menu="@menu/slidemenu"
+        app:headerLayout="@layout/header_drawer"
+        />
 
 
 </android.support.v4.widget.DrawerLayout>

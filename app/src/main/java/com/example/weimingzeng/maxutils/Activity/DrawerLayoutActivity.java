@@ -1,33 +1,70 @@
 package com.example.weimingzeng.maxutils.Activity;
 
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.weimingzeng.maxutils.Fragments.CardViewFragment;
+import com.example.weimingzeng.maxutils.Fragments.PersonFragment;
+import com.example.weimingzeng.maxutils.Fragments.TabLayoutFragment;
+import com.example.weimingzeng.maxutils.Fragments.VideoFragment;
 import com.example.weimingzeng.maxutils.R;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-public class DrawerLayoutActivity extends AppCompatActivity {
+public class DrawerLayoutActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDlLayout;
-    private ListView mLeftMenu;
+    private NavigationView mNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_drawer_layout);
-        setContentView(R.layout.layout_drawer);
+    }
+
+    @Override
+    protected void initView() {
+        setContentView(R.layout.activity_drawer_layout);
+        mNavigationView = findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         mDlLayout = findViewById(R.id.drawer_layout);
-        mLeftMenu = findViewById(R.id.lv_drawer);
-        String[] ss = new String[] {"新闻", "音乐", "电影"};
-        List ll = new ArrayList(Arrays.asList(ss));
-        mLeftMenu.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ll));
+        //下面的代码主要通过actionbardrawertoggle将toolbar与drawablelayout关联起来.可以点击toolbar图标弹出navigationView
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDlLayout, toolbar, 0, 0);
+        toggle.syncState();//加上同步
+        mDlLayout.addDrawerListener(toggle);
+
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //写右侧滑栏的点击事件逻辑
+        switch (item.getItemId()) {
+            case R.id.nav_person:
+                PersonFragment personFragment = PersonFragment.newInstance();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, personFragment).commit();
+                break;
+            case R.id.nav_movie:
+                CardViewFragment cardViewFragment = CardViewFragment.newInstance();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, cardViewFragment).commit();
+                break;
+            case R.id.nav_news:
+                VideoFragment videoFragment = VideoFragment.newInstance();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, videoFragment).commit();
+                break;
+            default:
+                TabLayoutFragment fragment = TabLayoutFragment.newInstance("", item.getItemId() + "");
+                getSupportFragmentManager().beginTransaction().replace(R.id.fr_content, fragment).commit();
+        }
+
+        mDlLayout.closeDrawers();
+        return false;
     }
 }

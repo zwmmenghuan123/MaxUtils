@@ -7,9 +7,9 @@
             android:icon="@mipmap/ic_menu_news"
             android:title="@string/news" />
         <item
-            android:id="@+id/nav_photo"
+            android:id="@+id/nav_person"
             android:icon="@mipmap/ic_menu_photo"
-            android:title="@string/photo"/>
+            android:title="@string/person"/>
         <item
             android:id="@+id/nav_movie"
             android:icon="@mipmap/ic_menu_movie"

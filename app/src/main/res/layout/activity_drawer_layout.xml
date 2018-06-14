@@ -1,33 +1,41 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary" />
 
     <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:id="@+id/drawerLayout">
+        tools:openDrawer="start">
 
+        <FrameLayout
+            android:id="@+id/fr_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.example.weimingzeng.maxutils.viewpager.MaxViewPager
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </FrameLayout>
 
         <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:id="@+id/navigationView"
             android:fitsSystemWindows="true"
-            app:headerLayout="@layout/main_drawer">
-
-        </android.support.design.widget.NavigationView>
+            app:headerLayout="@layout/header_drawer"
+            app:menu="@menu/slidemenu" />
 
     </android.support.v4.widget.DrawerLayout>
-
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/coordinatorLayout"
-        android:layout_alignParentBottom="true"/>
-
-</RelativeLayout>
+</LinearLayout>
