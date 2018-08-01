@@ -5,6 +5,7 @@ import com.example.weimingzeng.maxutils.netUtils.converter.MaxConverterFactory;
 import com.example.weimingzeng.maxutils.netUtils.interceptor.AddCookiesInterceptor;
 import com.example.weimingzeng.maxutils.netUtils.interceptor.CacheInterceptor;
 import com.example.weimingzeng.maxutils.netUtils.interceptor.HeaderInterceptor;
+import com.example.weimingzeng.maxutils.netUtils.interceptor.ProgressInterceptor;
 import com.example.weimingzeng.maxutils.netUtils.interceptor.ReceivedCookiesInterceptor;
 import com.example.weimingzeng.maxutils.netUtils.interceptor.TokenInterceptor;
 
@@ -45,6 +46,7 @@ public class RetrofitHelper {
             //添加cookie拦截器
 //            .addInterceptor(new AddCookiesInterceptor())
 //            .addInterceptor(new ReceivedCookiesInterceptor())
+//            .addInterceptor(new ProgressInterceptor())//实现下载进度监听回调
             .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT_READ, TimeUnit.SECONDS)

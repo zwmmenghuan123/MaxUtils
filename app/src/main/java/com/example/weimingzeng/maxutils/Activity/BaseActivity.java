@@ -1,16 +1,20 @@
 package com.example.weimingzeng.maxutils.Activity;
 
-import android.graphics.Color;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.weimingzeng.maxutils.Fragments.BaseFragment;
 import com.example.weimingzeng.maxutils.R;
 
-public class BaseActivity extends AppCompatActivity {
+import java.util.List;
+
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+
+public class BaseActivity extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,5 +41,16 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void initPresenter() {
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment fragment : fragments) {
+            if (fragment != null && fragment .isVisible() && fragment instanceof BaseFragment) {
+                return ((BaseFragment) fragment).onKeyDown(keyCode, event);
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.weimingzeng.maxutils.lab.hook.HookUtils;
+
 /**
  * Date: 2018/5/22
  * author:Weiming Max Zeng
@@ -23,6 +25,13 @@ public class MaxApplication extends Application implements Application.ActivityL
         mContext = getApplicationContext();
         mApplication = this;
         registerActivityLifecycleCallbacks(this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        HookUtils.hookSystemHandler();
+        HookUtils.hookAms();
     }
 
     @Override

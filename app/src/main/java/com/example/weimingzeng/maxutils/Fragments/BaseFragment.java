@@ -1,16 +1,10 @@
 package com.example.weimingzeng.maxutils.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.example.weimingzeng.maxutils.R;
+import android.view.KeyEvent;
 
 public abstract class BaseFragment extends Fragment {
 
@@ -35,4 +29,8 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void loadData();
 
+    //处理来自Activity的键盘事件
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return true;
+    }
 }
